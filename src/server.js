@@ -1,8 +1,9 @@
 import express from 'express';
 import { env } from './utils/env.js';
 import cors from 'cors';
-import pino from 'pino-http';
-import { pinoConfigs } from './config/pinoConfigs.js';
+// import pino from 'pino-http';
+// import pino from 'pino';
+// import { pinoConfigs } from './config/pinoConfigs.js';
 import router from './routers/index.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
@@ -14,7 +15,12 @@ export const setupServer = () => {
 
   app.use(cors());
 
-  app.use(pino(pinoConfigs));
+  // app.use(pino(pinoConfigs));
+  // const logger = pino();
+  // app.use((req, res, next) => {
+  //   logger.info(`${req.method} ${req.url}`);
+  //   next();
+  // });
 
   app.use(router);
 
