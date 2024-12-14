@@ -3,7 +3,7 @@ import Joi from 'joi';
 const phoneNumberPattern = /^\+?\d[\d-]*\d$/;
 
 export const createContactSchema = Joi.object({
-  name: Joi.string().alphanum().min(3).max(20).required(),
+  name: Joi.string().min(3).max(20).required(),
   phoneNumber: Joi.string()
     .min(3)
     .max(20)
