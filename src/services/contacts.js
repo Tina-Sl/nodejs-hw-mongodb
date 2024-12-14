@@ -37,10 +37,7 @@ export async function getAllContacts({
 }
 
 export function getContactById(id, userId) {
-  return ContactsCollection.findOne({
-    _id: id,
-    userId: userId,
-  });
+  return ContactsCollection.findOne({ _id: id, userId });
 }
 
 export async function createContact(contact) {
