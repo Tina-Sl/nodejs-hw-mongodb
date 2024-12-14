@@ -1,9 +1,12 @@
 import express from 'express';
 import { env } from './utils/env.js';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
+
 // import pino from 'pino-http';
 // import pino from 'pino';
 // import { pinoConfigs } from './config/pinoConfigs.js';
+
 import router from './routers/index.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
@@ -22,6 +25,7 @@ export const setupServer = () => {
   //   next();
   // });
 
+  app.use(cookieParser());
   app.use(router);
 
   app.use('*', notFoundHandler);

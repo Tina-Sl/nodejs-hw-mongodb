@@ -8,11 +8,12 @@ export async function getAllContacts({
   sortOrder = SORT_ORDER.ASC,
   sortBy = '_id',
   filter = {},
+  userId,
 }) {
   const skip = page > 0 ? (page - 1) * perPage : 0;
   const limit = perPage;
 
-  const contactsQuery = ContactsCollection.find();
+  const contactsQuery = ContactsCollection.find({ userId });
 
   if (filter.contactType) {
     contactsQuery.where('contactType').equals(filter.contactType);
@@ -35,24 +36,32 @@ export async function getAllContacts({
   return { data: contacts, ...paginationData };
 }
 
-export function getContactById(id) {
-  return ContactsCollection.findById(id);
+export function getContactById(id, userId) {
+  return ContactsCollection.findOne({
+    _id: id,
+    userId: userId,
+  });
 }
 
 export async function createContact(contact) {
   return ContactsCollection.create(contact);
 }
 
-export async function deleteContact(id) {
-  return ContactsCollection.findByIdAndDelete({
+export async function deleteContact(id, userId) {
+  return ContactsCollection.findOneAndDelete({
     _id: id,
+    userId,
   });
 }
 
-export function updateContact(id, contact) {
-  return ContactsCollection.findByIdAndUpdate(id, contact, {
-    new: true,
-  });
+export async function updateContact(id, userId, contact) {
+  return await ContactsCollection.findOneAndUpdate(
+    { _id: id, userId },
+    contact,
+    {
+      new: true,
+    },
+  );
 }
 
 export async function replaceContact(id, contact) {

@@ -23,6 +23,7 @@ export async function getContactsController(req, res) {
     sortBy,
     sortOrder,
     filter,
+    userId: req.user._id,
   });
   res.json({
     status: 200,
@@ -33,7 +34,8 @@ export async function getContactsController(req, res) {
 
 export async function getContactByIdController(req, res) {
   const { contactId } = req.params;
-  const contact = await getContactById(contactId);
+  const userId = req.user._id;
+  const contact = await getContactById(contactId, userId);
   if (!contact) {
     throw createHttpError(404, 'Contact not found');
   }
@@ -45,7 +47,14 @@ export async function getContactByIdController(req, res) {
 }
 
 export async function createContactController(req, res) {
-  const result = await createContact(req.body);
+  const result = await createContact({
+    name: req.body.name,
+    phoneNumber: req.body.phoneNumber,
+    email: req.body.email,
+    isFavorite: req.body.isFavorite,
+    contactType: req.body.contactType,
+    userId: req.user._id,
+  });
   res.status(201).send({
     status: 201,
     message: 'Successfully created a contact!',
@@ -55,7 +64,8 @@ export async function createContactController(req, res) {
 
 export async function deleteContactController(req, res) {
   const { contactId } = req.params;
-  const contact = await deleteContact(contactId);
+  const userId = req.user._id;
+  const contact = await deleteContact(contactId, userId);
   if (!contact) {
     throw new createHttpError.NotFound('Contact not found');
   }
@@ -64,7 +74,8 @@ export async function deleteContactController(req, res) {
 
 export async function patchContactController(req, res) {
   const { contactId } = req.params;
-  const result = await updateContact(contactId, req.body);
+  const userId = req.user._id;
+  const result = await updateContact(contactId, userId, req.body);
   if (!result) {
     throw new createHttpError.NotFound('Contact not found');
   }
@@ -83,6 +94,7 @@ export async function replaceContactController(req, res) {
     email: req.body.email,
     isFavourite: req.body.isFavourite,
     contactType: req.body.contactType,
+    userId: req.user._id,
   };
   const result = await replaceContact(contactId, contact);
   if (!result) {
