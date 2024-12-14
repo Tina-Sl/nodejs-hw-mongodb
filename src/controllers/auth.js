@@ -12,8 +12,8 @@ export async function registerController(req, res) {
     password: req.body.password,
   };
   const user = await registerUser(payload);
-  res.status(200).json({
-    status: 200,
+  res.status(201).json({
+    status: 201,
     message: 'Successfully registered a user!',
     data: user,
   });
