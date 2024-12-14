@@ -5,12 +5,15 @@ import { UsersCollection } from '../db/models/users.js';
 export async function authenticate(req, res, next) {
   const authHeader = req.get('Authorization');
   if (!authHeader) {
-    return next(createHttpError(401, 'Please provide Authorization header'));
+    next(createHttpError(401, 'Please provide Authorization header'));
+    return;
   }
-  const [bearer, accessToken] = authHeader.split(' ', 2);
+  const bearer = authHeader.split(' ')[0];
+  const accessToken = authHeader.split(' ')[1];
 
   if (bearer !== 'Bearer' || !accessToken) {
-    return next(createHttpError(401, 'Auth header should be of type Bearer'));
+    next(createHttpError(401, 'Auth header should be of type Bearer'));
+    return;
   }
   const session = await SessionsCollection.findOne({
     accessToken: accessToken,
