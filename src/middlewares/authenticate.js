@@ -10,7 +10,6 @@ export async function authenticate(req, res, next) {
   }
   const bearer = authHeader.split(' ')[0];
   const accessToken = authHeader.split(' ')[1];
-
   if (bearer !== 'Bearer' || !accessToken) {
     next(createHttpError(401, 'Auth header should be of type Bearer'));
     return;
@@ -18,6 +17,7 @@ export async function authenticate(req, res, next) {
   const session = await SessionsCollection.findOne({
     accessToken: accessToken,
   });
+
   if (!session) {
     return next(createHttpError(401, 'Session not found'));
   }

@@ -5,3 +5,11 @@
 .vscode
 .DS_Store
 .idea
+
+/src/tmp/*
+!/src/tmp/.gitkeep
+
+/src/upload/*
+!/src/upload/.gitkeep
+/src/upload/photos/*
+!/src/upload/photos/.gitkeep
