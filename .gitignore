@@ -10,5 +10,5 @@
 !/src/tmp/.gitkeep
 
 /src/uploads/*
-!/src/upload/.gitkeep
+!/src/uploads/.gitkeep
 
