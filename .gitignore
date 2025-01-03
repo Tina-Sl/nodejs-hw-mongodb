@@ -9,7 +9,6 @@
 /src/tmp/*
 !/src/tmp/.gitkeep
 
-/src/upload/*
+/src/uploads/*
 !/src/upload/.gitkeep
-/src/upload/photos/*
-!/src/upload/photos/.gitkeep
+
