@@ -12,8 +12,6 @@ import {
   replaceContact,
 } from '../services/contacts.js';
 import { saveFileToCloudinary } from '../utils/saveFileToCloudinary.js';
-import { saveFileToUploadDir } from '../utils/saveFileToUploadDir.js';
-import { env } from '../utils/env.js';
 
 export async function getContactsController(req, res) {
   const { page, perPage } = parsePaginationParams(req.query);
@@ -52,10 +50,10 @@ export async function createContactController(req, res) {
   const photo = req.file;
   let photoUrl = null;
   if (photo) {
-    if (env('ENABLE_CLOUDINARY') === 'true') {
+    try {
       photoUrl = await saveFileToCloudinary(photo);
-    } else {
-      photoUrl = await saveFileToUploadDir(photo);
+    } catch {
+      throw createHttpError.InternalServerError('Failed to save photo');
     }
   }
   const result = await createContact({
@@ -91,10 +89,10 @@ export async function patchContactController(req, res) {
   const photo = req.file;
   let photoUrl = null;
   if (photo) {
-    if (process.env.ENABLE_CLOUDINARY === 'true') {
+    try {
       photoUrl = await saveFileToCloudinary(photo);
-    } else {
-      photoUrl = await saveFileToUploadDir(photo);
+    } catch {
+      throw createHttpError.InternalServerError('Failed to save photo');
     }
   }
   const result = await updateContact(contactId, userId, {

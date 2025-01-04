@@ -10,8 +10,8 @@ cloudinary.v2.config({
   api_secret: env(CLOUDINARY.API_SECRET),
 });
 
-export const saveFileToCloudinary = async (file) => {
+export async function saveFileToCloudinary(file) {
   const response = await cloudinary.v2.uploader.upload(file.path);
   await fs.unlink(file.path);
   return response.secure_url;
-};
+}
