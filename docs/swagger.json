@@ -37,7 +37,7 @@
         ],
         "summary": "Get list of contacts",
         "operationId": "getContacts",
-        "description": "**Retrieve a list of contacts**\n\nThis endpoint allows you to:\n- Filter   -- contacts by various attributes such as name, phone number, email, and more.\n- Sort     -- contacts based on any field in either ascending or descending order.\n- Paginate -- results to efficiently manage large datasets.\n\n### Security\n- Requires a valid Bearer Token to be provided in the `Authorization` header.\n",
+        "description": "**Retrieve a list of contacts**\n\nThis endpoint allows you to:\n- Filter   -- contacts by various attributes such as name, phone number, email, and more.\n- Sort     -- contacts based on any field in either ascending or descending order.\n- Paginate -- results to efficiently manage large datasets.\n\n### Security\n- This endpoint requires authentication via a Bearer Token.\n",
         "security": [
           {
             "bearerAuth": []
@@ -221,7 +221,7 @@
                   "email": {
                     "description": "Contact's email",
                     "type": "string",
-                    "example": "mia@ukr.net"
+                    "example": "user123@gmail.com"
                   },
                   "isFavourite": {
                     "description": "Whether the contact is favourite",
@@ -287,7 +287,7 @@
         ],
         "summary": "Retrieve a Contact by ID",
         "operationId": "getContact",
-        "description": "**Retrieve a specific contact by its unique identifier.**\n\nThis endpoint allows you to fetch details of a contact using its `contactId`.\n\n### Security\n- Requires a valid Bearer Token to be provided in the `Authorization` header.\n",
+        "description": "**Retrieve a specific contact by its unique identifier.**\n\nThis endpoint allows you to fetch details of a contact using its `contactId`.\n\n### Security\n- This endpoint requires authentication via a Bearer Token.\n",
         "security": [
           {
             "bearerAuth": []
@@ -390,7 +390,7 @@
         ],
         "summary": "Delete an Existing Contact",
         "operationId": "deleteContact",
-        "description": "**Delete an Existing Contact**\n\nThis endpoint allows you to delete an existing contact from your list.\nOnce deleted, the contact cannot be recovered.\n\n### Security\n- This endpoint requires authentication.\n",
+        "description": "**Delete an Existing Contact**\n\nThis endpoint allows you to delete an existing contact from your list.\nOnce deleted, the contact cannot be recovered.\n\n### Security\n- This endpoint requires authentication via a Bearer Token.\n",
         "security": [
           {
             "bearerAuth": []
@@ -446,7 +446,7 @@
           "Contacts"
         ],
         "summary": "Update an Existing Contact",
-        "description": "**Update specific fields of a contact by ID**\n\nThis endpoint allows you to partially update an existing contact.\nYou can modify any of the fields except for system fields and `userId`.\n\nFields that Can Be Updated\n- name: The contact's name.\n- phoneNumber: The contact's phone number, including country code if necessary.\n- email: The contact's email address (optional).\n- isFavorite: A boolean flag indicating whether the contact is marked as a favorite.\n- contactType: The type of the contact. Options include `work`, `home`, and `personal`.\n- photo: An optional file for the contact's photo. This should be an image file.\n\nFields that Cannot Be Updated\n  - id: Unique identifier for the contact, automatically generated.\n  - createdAt: Timestamp when the contact was created, managed by the system.\n  - updatedAt: Timestamp when the contact was last updated, managed by the system.\n  - userId: The ID of the user associated with the contact.\n\n### Security\n- This endpoint requires authentication.\n",
+        "description": "**Update specific fields of a contact by ID**\n\nThis endpoint allows you to partially update an existing contact.\nEnter the value in the field you want to change.\n\n### Security\n- This endpoint requires authentication via a Bearer Token.\n",
         "operationId": "updateContact",
         "security": [
           {
@@ -475,18 +475,15 @@
                 "properties": {
                   "name": {
                     "description": "Contact's name",
-                    "type": "string",
-                    "example": "Oscar"
+                    "type": "string"
                   },
                   "email": {
                     "description": "Contact's email",
-                    "type": "string",
-                    "example": "ddj341@example.com"
+                    "type": "string"
                   },
                   "phoneNumber": {
                     "description": "Contact's phone number",
-                    "type": "number",
-                    "example": "+38000099004"
+                    "type": "number"
                   },
                   "contactType": {
                     "description": "Contact's type",
@@ -495,13 +492,11 @@
                       "work",
                       "home",
                       "personal"
-                    ],
-                    "example": "home"
+                    ]
                   },
                   "isFavourite": {
                     "description": "Whether the contact is favourite",
-                    "type": "boolean",
-                    "example": false
+                    "type": "boolean"
                   },
                   "photo": {
                     "description": "Contact's photo",
