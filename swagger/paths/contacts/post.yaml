@@ -43,7 +43,7 @@ requestBody:
           email:
             description: "Contact's email"
             type: string
-            example: mia@ukr.net
+            example: user123@gmail.com
           isFavourite:
             description: 'Whether the contact is favourite'
             type: boolean

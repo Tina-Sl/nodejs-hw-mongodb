@@ -5,24 +5,10 @@ description: |
   **Update specific fields of a contact by ID**
 
   This endpoint allows you to partially update an existing contact.
-  You can modify any of the fields except for system fields and `userId`.
-
-  Fields that Can Be Updated
-  - name: The contact's name.
-  - phoneNumber: The contact's phone number, including country code if necessary.
-  - email: The contact's email address (optional).
-  - isFavorite: A boolean flag indicating whether the contact is marked as a favorite.
-  - contactType: The type of the contact. Options include `work`, `home`, and `personal`.
-  - photo: An optional file for the contact's photo. This should be an image file.
-
-  Fields that Cannot Be Updated
-    - id: Unique identifier for the contact, automatically generated.
-    - createdAt: Timestamp when the contact was created, managed by the system.
-    - updatedAt: Timestamp when the contact was last updated, managed by the system.
-    - userId: The ID of the user associated with the contact.
+  Enter the value in the field you want to change.
 
   ### Security
-  - This endpoint requires authentication.
+  - This endpoint requires authentication via a Bearer Token.
 operationId: updateContact
 security:
   - bearerAuth: []
@@ -45,24 +31,19 @@ requestBody:
           name:
             description: "Contact's name"
             type: string
-            example: 'Oscar'
           email:
             description: "Contact's email"
             type: string
-            example: 'ddj341@example.com'
           phoneNumber:
             description: "Contact's phone number"
             type: number
-            example: '+38000099004'
           contactType:
             description: "Contact's type"
             type: string
             enum: ['work', 'home', 'personal']
-            example: 'home'
           isFavourite:
             description: 'Whether the contact is favourite'
             type: boolean
-            example: false
           photo:
             description: "Contact's photo"
             type: string

@@ -11,7 +11,7 @@ description: |
   - Paginate -- results to efficiently manage large datasets.
 
   ### Security
-  - Requires a valid Bearer Token to be provided in the `Authorization` header.
+  - This endpoint requires authentication via a Bearer Token.
 security:
   - bearerAuth: []
 parameters:

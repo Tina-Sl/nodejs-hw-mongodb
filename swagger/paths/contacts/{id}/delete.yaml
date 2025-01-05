@@ -9,7 +9,7 @@ description: |
   Once deleted, the contact cannot be recovered.
 
   ### Security
-  - This endpoint requires authentication.
+  - This endpoint requires authentication via a Bearer Token.
 
 security:
   - bearerAuth: []

@@ -8,8 +8,7 @@ description: |
   This endpoint allows you to fetch details of a contact using its `contactId`.
 
   ### Security
-  - Requires a valid Bearer Token to be provided in the `Authorization` header.
-
+  - This endpoint requires authentication via a Bearer Token.
 security:
   - bearerAuth: []
 parameters:
