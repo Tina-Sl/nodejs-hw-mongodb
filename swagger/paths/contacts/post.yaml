@@ -5,8 +5,8 @@ operationId: createContact
 description: |
   **Create a new contact**
 
-  Required Fields
-  - name: The full name of the contact.
+  Required fields
+  - name: The name of the contact.
   - phoneNumber: The contact's phone number, including country code if necessary.
   - contactType: The type of contact (e.g., work, home, personal).
 
@@ -33,13 +33,16 @@ requestBody:
           name:
             type: string
             description: The name of the contact
+            example: 'Jonn Doe'
           phoneNumber:
             type: string
             description: The phone number of the contact
+            example: '+3800000000'
           contactType:
             type: string
             description: The type of contact
             enum: ['work', 'home', 'personal']
+            example: 'personal'
           email:
             description: "Contact's email"
             type: string

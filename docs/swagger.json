@@ -184,7 +184,7 @@
         ],
         "summary": "Create contact",
         "operationId": "createContact",
-        "description": "**Create a new contact**\n\nRequired Fields\n- name: The full name of the contact.\n- phoneNumber: The contact's phone number, including country code if necessary.\n- contactType: The type of contact (e.g., work, home, personal).\n\nOptional Fields\n- email: The contact's email address (optional).\n- isFavorite: A boolean flag indicating whether the contact is marked as a favorite (optional).\n- photo: An optional image file for the contact's photo.\n\n### Security\n- This endpoint requires authentication via a Bearer Token.\n",
+        "description": "**Create a new contact**\n\nRequired fields\n- name: The name of the contact.\n- phoneNumber: The contact's phone number, including country code if necessary.\n- contactType: The type of contact (e.g., work, home, personal).\n\nOptional Fields\n- email: The contact's email address (optional).\n- isFavorite: A boolean flag indicating whether the contact is marked as a favorite (optional).\n- photo: An optional image file for the contact's photo.\n\n### Security\n- This endpoint requires authentication via a Bearer Token.\n",
         "security": [
           {
             "bearerAuth": []
@@ -203,11 +203,13 @@
                 "properties": {
                   "name": {
                     "type": "string",
-                    "description": "The name of the contact"
+                    "description": "The name of the contact",
+                    "example": "Jonn Doe"
                   },
                   "phoneNumber": {
                     "type": "string",
-                    "description": "The phone number of the contact"
+                    "description": "The phone number of the contact",
+                    "example": "+3800000000"
                   },
                   "contactType": {
                     "type": "string",
@@ -216,7 +218,8 @@
                       "work",
                       "home",
                       "personal"
-                    ]
+                    ],
+                    "example": "personal"
                   },
                   "email": {
                     "description": "Contact's email",
@@ -446,7 +449,7 @@
           "Contacts"
         ],
         "summary": "Update an Existing Contact",
-        "description": "**Update specific fields of a contact by ID**\n\nThis endpoint allows you to partially update an existing contact.\nEnter the value in the field you want to change.\n\n### Security\n- This endpoint requires authentication via a Bearer Token.\n",
+        "description": "**Update specific fields of a contact by ID**\n\nThis endpoint allows you to partially update an existing contact.\n\n### Security\n- This endpoint requires authentication via a Bearer Token.\n",
         "operationId": "updateContact",
         "security": [
           {
@@ -475,15 +478,18 @@
                 "properties": {
                   "name": {
                     "description": "Contact's name",
-                    "type": "string"
+                    "type": "string",
+                    "example": "Jonn Doe"
                   },
                   "email": {
                     "description": "Contact's email",
-                    "type": "string"
+                    "type": "string",
+                    "example": "user123@example.com"
                   },
                   "phoneNumber": {
                     "description": "Contact's phone number",
-                    "type": "number"
+                    "type": "number",
+                    "example": "+3800000000"
                   },
                   "contactType": {
                     "description": "Contact's type",
@@ -492,11 +498,13 @@
                       "work",
                       "home",
                       "personal"
-                    ]
+                    ],
+                    "example": "personal"
                   },
                   "isFavourite": {
                     "description": "Whether the contact is favourite",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "example": false
                   },
                   "photo": {
                     "description": "Contact's photo",

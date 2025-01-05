@@ -5,7 +5,6 @@ description: |
   **Update specific fields of a contact by ID**
 
   This endpoint allows you to partially update an existing contact.
-  Enter the value in the field you want to change.
 
   ### Security
   - This endpoint requires authentication via a Bearer Token.
@@ -31,19 +30,24 @@ requestBody:
           name:
             description: "Contact's name"
             type: string
+            example: 'Jonn Doe'
           email:
             description: "Contact's email"
             type: string
+            example: 'user123@example.com'
           phoneNumber:
             description: "Contact's phone number"
             type: number
+            example: '+3800000000'
           contactType:
             description: "Contact's type"
             type: string
             enum: ['work', 'home', 'personal']
+            example: 'personal'
           isFavourite:
             description: 'Whether the contact is favourite'
             type: boolean
+            example: false
           photo:
             description: "Contact's photo"
             type: string
