@@ -29,5 +29,5 @@ content:
           properties:
             message:
               type: string
-              example: 'Failed to delete contact, please try again later.'
+              example: 'Internal server Error'
               description: 'Detailed error message'

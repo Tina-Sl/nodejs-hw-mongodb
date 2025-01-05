@@ -62,7 +62,7 @@ parameters:
     example: 'ASC'
 responses:
   '200':
-    description: Successfully retrieved filtered, paginated, and sorted contacts
+    description: Successfully found contacts!
     content:
       application/json:
         schema:

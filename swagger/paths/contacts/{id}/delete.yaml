@@ -24,33 +24,23 @@ parameters:
 
 responses:
   '204':
-    description: 'The contact was successfully deleted'
+    description: Contact deleted successfully
+      **  (No Content)**
     content: {}
-  '400':
-    description: 'The request was invalid or contained errors.'
+  '404':
+    description: Contact not found
     content:
       application/json:
         schema:
           type: object
           properties:
-            status:
-              type: integer
-              example: 400
-              description: 'HTTP status code indicating a bad request'
-            message:
+            success:
+              type: boolean
+              example: false
+            error:
               type: string
-              example: BadRequestError
-              description: 'Error message indicating the nature of the bad request'
-            data:
-              type: object
-              properties:
-                message:
-                  type: string
-                  example: 'Invalid contactId provided'
-                  description: 'Detailed error message'
-  '401':
-    $ref: ../../../components/responses/401.yaml
+              example: 'Contact not found.'
   '500':
-    $ref: ../../../components/responses/500.yaml
-  '404':
-    $ref: ../../../components/responses/404.yaml
+    $ref: '../../../components/responses/500.yaml'
+  '401':
+    $ref: '../../../components/responses/401.yaml'

@@ -15,7 +15,7 @@ properties:
   name:
     description: 'The name of the contact'
     type: string
-    example: 'Oscar'
+    example: 'John Doe'
   phoneNumber:
     description: "The contact's phone number"
     type: number
@@ -28,7 +28,7 @@ properties:
   email:
     description: "The contact's email address"
     type: string
-    example: mia@ukr.net
+    example: dd341@example.com
   isFavourite:
     description: 'Indicates whether the contact is marked as a favorite'
     type: boolean
