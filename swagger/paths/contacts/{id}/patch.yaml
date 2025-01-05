@@ -1,0 +1,98 @@
+tags:
+  - Contacts
+summary: Update an Existing Contact
+description: |
+  **Update specific fields of a contact by ID**
+
+  This endpoint allows you to partially update an existing contact.
+  You can modify any of the fields except for system fields and `userId`.
+
+  Fields that Can Be Updated
+  - name: The contact's name.
+  - phoneNumber: The contact's phone number, including country code if necessary.
+  - email: The contact's email address (optional).
+  - isFavorite: A boolean flag indicating whether the contact is marked as a favorite.
+  - contactType: The type of the contact. Options include `work`, `home`, and `personal`.
+  - photo: An optional file for the contact's photo. This should be an image file.
+
+  Fields that Cannot Be Updated
+    - id: Unique identifier for the contact, automatically generated.
+    - createdAt: Timestamp when the contact was created, managed by the system.
+    - updatedAt: Timestamp when the contact was last updated, managed by the system.
+    - userId: The ID of the user associated with the contact.
+
+  ### Security
+  - This endpoint requires authentication.
+operationId: updateContact
+security:
+  - bearerAuth: []
+parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: string
+    description: 'The unique identifier of the contact to be updated.'
+    example: '6779b9f903d039994c667196'
+requestBody:
+  description: Fields to update in the contact
+  required: true
+  content:
+    multipart/form-data:
+      schema:
+        type: object
+        properties:
+          name:
+            description: "Contact's name"
+            type: string
+            example: 'Oscar'
+          email:
+            description: "Contact's email"
+            type: string
+            example: 'ddj341@example.com'
+          phoneNumber:
+            description: "Contact's phone number"
+            type: number
+            example: '+38000099004'
+          contactType:
+            description: "Contact's type"
+            type: string
+            enum: ['work', 'home', 'personal']
+            example: 'home'
+          isFavourite:
+            description: 'Whether the contact is favourite'
+            type: boolean
+            example: false
+          photo:
+            description: "Contact's photo"
+            type: string
+            format: binary
+responses:
+  '200':
+    description: Contact updated successfully
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Successfully updated the contact!
+            data:
+              type: object
+              $ref: '../../../components/schemas/contact.yaml'
+  '400':
+    $ref: '../../../components/responses/400.yaml'
+  '401':
+    $ref: '../../../components/responses/401.yaml'
+  '404':
+    $ref: '../../../components/responses/404.yaml'
+  '500':
+    $ref: '../../../components/responses/500.yaml'

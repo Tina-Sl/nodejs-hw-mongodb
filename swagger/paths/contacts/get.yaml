@@ -1,0 +1,99 @@
+tags:
+  - Contacts
+summary: Get list of contacts
+operationId: getContacts
+description: |
+  **Retrieve a list of contacts**
+
+  This endpoint allows you to:
+  - Filter   -- contacts by various attributes such as name, phone number, email, and more.
+  - Sort     -- contacts based on any field in either ascending or descending order.
+  - Paginate -- results to efficiently manage large datasets.
+
+  ### Security
+  - Requires a valid Bearer Token to be provided in the `Authorization` header.
+security:
+  - bearerAuth: []
+parameters:
+  - in: query
+    name: name
+    schema:
+      type: string
+    description: Filter by contact name
+    example: 'John'
+  - in: query
+    name: isFavourite
+    schema:
+      type: boolean
+    description: Filter by whether the contact is marked as favourite.
+    example: true
+  - in: query
+    name: contactType
+    schema:
+      type: string
+      enum: [work, home, personal]
+    description: Filter by contact type.
+    example: 'home'
+  - in: query
+    name: page
+    schema:
+      type: integer
+    description: Page number for pagination.
+    example: 1
+  - in: query
+    name: perPage
+    schema:
+      type: integer
+    description: Number of items per page.
+    example: 10
+  - in: query
+    name: sortBy
+    schema:
+      type: string
+      enum: [name, email, isFavourite]
+    description: Field by which to sort the contacts.
+    example: 'name'
+  - in: query
+    name: sortOrder
+    schema:
+      type: string
+      enum: [ASC, DESC]
+    description: Order to sort the contacts (ascending or descending).
+    example: 'ASC'
+responses:
+  '200':
+    description: Successfully retrieved filtered, paginated, and sorted contacts
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Successfully retrieved contacts.
+            data:
+              type: array
+              items:
+                $ref: '../../components/schemas/contact.yaml'
+            pagination:
+              type: object
+              properties:
+                total:
+                  type: integer
+                  example: 100
+                page:
+                  type: integer
+                  example: 1
+                perPage:
+                  type: integer
+                  example: 10
+                totalPages:
+                  type: integer
+                  example: 10
+  '401':
+    $ref: '../../components/responses/401.yaml'
+  '500':
+    $ref: '../../components/responses/500.yaml'

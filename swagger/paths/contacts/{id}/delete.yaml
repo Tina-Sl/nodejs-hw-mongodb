@@ -1,0 +1,56 @@
+tags:
+  - Contacts
+summary: Delete an Existing Contact
+operationId: deleteContact
+description: |
+  **Delete an Existing Contact**
+
+  This endpoint allows you to delete an existing contact from your list.
+  Once deleted, the contact cannot be recovered.
+
+  ### Security
+  - This endpoint requires authentication.
+
+security:
+  - bearerAuth: []
+parameters:
+  - in: path
+    name: id
+    required: true
+    schema:
+      type: string
+    description: 'The unique identifier of the contact to be deleted.'
+    example: '6779c35e16fb05e4092b039b'
+
+responses:
+  '204':
+    description: 'The contact was successfully deleted'
+    content: {}
+  '400':
+    description: 'The request was invalid or contained errors.'
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            status:
+              type: integer
+              example: 400
+              description: 'HTTP status code indicating a bad request'
+            message:
+              type: string
+              example: BadRequestError
+              description: 'Error message indicating the nature of the bad request'
+            data:
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: 'Invalid contactId provided'
+                  description: 'Detailed error message'
+  '401':
+    $ref: ../../../components/responses/401.yaml
+  '500':
+    $ref: ../../../components/responses/500.yaml
+  '404':
+    $ref: ../../../components/responses/404.yaml

@@ -1,0 +1,42 @@
+description: Created
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - status
+        - message
+        - data
+      properties:
+        status:
+          type: integer
+          example: 201
+        message:
+          type: string
+          example: Successfully registered a user!
+        data:
+          type: object
+          required:
+            - _id
+            - name
+            - emai
+            - createdAt
+            - updatedAt
+          properties:
+            _id:
+              type: string
+              example: 6779e49afe69375c85487a9c
+            name:
+              type: string
+              example: 'User A'
+            email:
+              type: string
+              example: user123@gmail.com
+            createdAt:
+              type: string
+              format: date-time
+              example: '2025-01-05T01:47:06.569+00:00'
+            updatedAt:
+              type: string
+              format: date-time
+              example: '2025-01-05T01:47:06.569+00:00'

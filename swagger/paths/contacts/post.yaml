@@ -1,0 +1,81 @@
+tags:
+  - Contacts
+summary: Create contact
+operationId: createContact
+description: |
+  **Create a new contact**
+
+  Required Fields
+  - name: The full name of the contact.
+  - phoneNumber: The contact's phone number, including country code if necessary.
+  - contactType: The type of contact (e.g., work, home, personal).
+
+  Optional Fields
+  - email: The contact's email address (optional).
+  - isFavorite: A boolean flag indicating whether the contact is marked as a favorite (optional).
+  - photo: An optional image file for the contact's photo.
+
+  ### Security
+  - This endpoint requires authentication via a Bearer Token.
+
+security:
+  - bearerAuth: []
+requestBody:
+  content:
+    multipart/form-data:
+      schema:
+        type: object
+        required:
+          - name
+          - phoneNumber
+          - contactType
+        properties:
+          name:
+            type: string
+            description: The name of the contact
+          phoneNumber:
+            type: string
+            description: The phone number of the contact
+          contactType:
+            type: string
+            description: The type of contact
+            enum: ['work', 'home', 'personal']
+          email:
+            description: "Contact's email"
+            type: string
+            example: mia@ukr.net
+          isFavourite:
+            description: 'Whether the contact is favourite'
+            type: boolean
+            example: false
+          photo:
+            description: "Contact's photo"
+            type: string
+            format: binary
+responses:
+  '201':
+    description: Creates a contact
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 201
+            message:
+              type: string
+              example: Successfully created a contact!
+            data:
+              type: object
+              $ref: '../../components/schemas/contact.yaml'
+  '400':
+    $ref: '../../components/responses/400.yaml'
+  '401':
+    $ref: '../../components/responses/401.yaml'
+  '500':
+    $ref: '../../components/responses/500.yaml'
