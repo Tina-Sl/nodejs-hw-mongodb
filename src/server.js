@@ -22,6 +22,7 @@ export const setupServer = () => {
   const swaggerDocument = JSON.parse(
     fs.readFileSync(path.resolve('docs/swagger.json'), 'utf-8'),
   );
+  console.log('path', path.resolve('docs/swagger.json'));
   const app = express();
   app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
   app.use(cors());
