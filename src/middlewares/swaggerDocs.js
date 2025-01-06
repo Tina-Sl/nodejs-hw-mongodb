@@ -9,7 +9,8 @@ export const swaggerDocs = () => {
     console.log('path', SWAGGER_PATH);
     const swaggerDoc = JSON.parse(fs.readFileSync(SWAGGER_PATH, 'utf-8'));
     return [swaggerUI.serve, swaggerUI.setup(swaggerDoc)];
-  } catch {
+  } catch (err) {
+    console.log(err);
     return (req, res, next) =>
       next(createHttpError(500, "Can't load swagger docs"));
   }
