@@ -6,6 +6,7 @@ import path from 'path';
 export const swaggerDocs = () => {
   try {
     const SWAGGER_PATH = path.join(process.cwd(), 'docs', 'swagger.json');
+    console.log('path', SWAGGER_PATH);
     const swaggerDoc = JSON.parse(fs.readFileSync(SWAGGER_PATH, 'utf-8'));
     return [swaggerUI.serve, swaggerUI.setup(swaggerDoc)];
   } catch {
